@@ -3,13 +3,6 @@ import { Document } from "mongoose";
 
 @Schema({
   timestamps: true,
-  indexes: [
-    { name: "text", description: "text" },
-    { price: 1 },
-    { category: 1 },
-    { stock: 1 },
-    { createdAt: -1 },
-  ],
 })
 export class Product extends Document {
   @Prop({
@@ -67,6 +60,11 @@ export class Product extends Document {
 
 export const ProductSchema = SchemaFactory.createForClass(Product);
 
-// Índices compuestos para búsquedas frecuentes
+// Definir los índices mediante "index()" en lugar de la propiedad "indexes" del decorador.
+ProductSchema.index({ name: "text", description: "text" });
+ProductSchema.index({ price: 1 });
+ProductSchema.index({ category: 1 });
+ProductSchema.index({ stock: 1 });
+ProductSchema.index({ createdAt: -1 });
 ProductSchema.index({ category: 1, price: 1 });
 ProductSchema.index({ category: 1, stock: 1 });

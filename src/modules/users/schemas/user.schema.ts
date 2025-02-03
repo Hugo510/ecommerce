@@ -11,7 +11,6 @@ import * as bcrypt from "bcrypt";
       return ret;
     },
   },
-  indexes: [{ email: 1, unique: true }, { role: 1 }, { createdAt: -1 }],
 })
 export class User extends Document {
   @Prop({
@@ -65,11 +64,18 @@ export class User extends Document {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
+// Obtener salt rounds desde variables de entorno, con valor por defecto.
+const SALT_ROUNDS = parseInt(process.env.SALT_ROUNDS || "10");
+
 UserSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
-    this.password = await bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   }
   next();
 });
 
+// Definir los índices a nivel de schema
+UserSchema.index({ email: 1 }, { unique: true });
+UserSchema.index({ role: 1 });
+UserSchema.index({ createdAt: -1 });
 UserSchema.index({ email: 1, role: 1 });

@@ -3,7 +3,6 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { LoggerModule } from "nestjs-pino";
 import configuration from "./config/configuration";
-// Ajuste de imports: especificar rutas completas para cada módulo
 import { AuthModule } from "./modules/auth/auth.module";
 import { UsersModule } from "./modules/users/users.module";
 import { ProductsModule } from "./modules/products/products.module";

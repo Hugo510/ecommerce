@@ -3,7 +3,6 @@ import { Document, Schema as MongooseSchema } from "mongoose";
 
 @Schema({
   timestamps: true,
-  indexes: [{ user: 1 }, { status: 1 }, { createdAt: -1 }],
 })
 export class Order extends Document {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: "User", required: true })
@@ -51,7 +50,10 @@ export class Order extends Document {
 
 export const OrderSchema = SchemaFactory.createForClass(Order);
 
-// Índices compuestos para consultas frecuentes
+// Definir índices fuera del decorador
+OrderSchema.index({ user: 1 });
+OrderSchema.index({ status: 1 });
+OrderSchema.index({ createdAt: -1 });
 OrderSchema.index({ user: 1, status: 1 });
 OrderSchema.index({ user: 1, createdAt: -1 });
 
