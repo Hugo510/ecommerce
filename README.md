@@ -47,11 +47,60 @@ La configuración global se establece en [src/app.module.ts](src/app.module.ts) 
 
 Crea un archivo **.env** en la raíz del proyecto con al menos las siguientes variables:
 
+```sh
+# Ejemplo de archivo .env
+MONGO_URI=mongodb://localhost:27017/ecommerce
+JWT_SECRET=tu_clave_secreta
+PORT=3000
+```
+
 ## Instalación y Ejecución
 
 Instala las dependencias:
 
-`````sh
+```sh
 npm install
-````sh
-`````
+```
+
+Para ejecutar el servidor en modo desarrollo:
+
+```sh
+npm run start:dev
+```
+
+Para compilar la aplicación:
+
+```sh
+npm run build
+```
+
+Y para ejecutar la versión compilada:
+
+```sh
+npm start
+```
+
+### Pruebas
+
+Para ejecutar las pruebas unitarias:
+
+```sh
+npm test
+```
+
+## Consideraciones de Seguridad
+
+### El proyecto incluye varias medidas de seguridad:
+
+- **Helmet:** Configura cabeceras seguras (ver src/main.ts).
+- **CSRF y Rate Limiting:** Implementados en main.ts utilizando csurf y express-rate-limit.
+- **Validación de Datos:** Realizada a través de DTOs y pipes globales.
+
+## Logging y Monitoreo
+
+El logging se realiza mediante el interceptor LoggingInterceptor y la integración de nestjs-pino, permitiendo rastrear las peticiones y respuestas a lo largo del ciclo de vida de la aplicación.
+
+## Notas Adicionales
+
+Se utilizan decoradores para rutas públicas. Ejemplo: [/src/modules/auth/decorators/public.decorator.ts](/src/modules/auth/decorators/public.decorator.ts).
+La sincronización de índices y otras operaciones de inicialización se realizan en los servicios correspondientes, como en users.[src/modules/users/user.services.ts](src/modules/users/users.service.ts).
