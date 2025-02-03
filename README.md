@@ -102,5 +102,5 @@ El logging se realiza mediante el interceptor LoggingInterceptor y la integraci�
 
 ## Notas Adicionales
 
-Se utilizan decoradores para rutas públicas. Ejemplo: [/src/modules/auth/decorators/public.decorator.ts](/src/modules/auth/decorators/public.decorator.ts).
-La sincronización de índices y otras operaciones de inicialización se realizan en los servicios correspondientes, como en users.[src/modules/users/user.services.ts](src/modules/users/users.service.ts).
+Se utilizan decoradores para rutas públicas. Ejemplo: [src/modules/auth/decorators/public.decorator.ts](/src/modules/auth/decorators/public.decorator.ts).
+La sincronización de índices y otras operaciones de inicialización se realizan en los servicios correspondientes, como en users [src/modules/users/user.services.ts](src/modules/users/users.service.ts).
