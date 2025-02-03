@@ -3,10 +3,13 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { LoggerModule } from "nestjs-pino";
 import configuration from "./config/configuration";
+// Ajuste de imports: especificar rutas completas para cada módulo
 import { AuthModule } from "./modules/auth/auth.module";
 import { UsersModule } from "./modules/users/users.module";
 import { ProductsModule } from "./modules/products/products.module";
 import { OrdersModule } from "./modules/orders/orders.module";
+import { ReviewsModule } from "./modules/reviews/reviews.module";
+import { PaymentsModule } from "./modules/payments/payments.module";
 import { APP_INTERCEPTOR, APP_GUARD } from "@nestjs/core";
 import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 import { JwtAuthGuard } from "./modules/auth/guards/jwt-auth.guard";
@@ -29,6 +32,8 @@ import { JwtAuthGuard } from "./modules/auth/guards/jwt-auth.guard";
     UsersModule,
     ProductsModule,
     OrdersModule,
+    ReviewsModule, // Nuevo módulo para reseñas
+    PaymentsModule, // Nuevo módulo para pagos
   ],
   providers: [
     {

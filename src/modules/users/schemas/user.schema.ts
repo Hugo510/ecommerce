@@ -7,27 +7,50 @@ import * as bcrypt from "bcrypt";
   toJSON: {
     transform: (_, ret) => {
       delete ret.password;
+      delete ret.__v;
       return ret;
     },
   },
   indexes: [{ email: 1, unique: true }, { role: 1 }, { createdAt: -1 }],
 })
 export class User extends Document {
-  @Prop({ required: true, unique: true })
+  @Prop({
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
+    match: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+  })
   email: string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    minlength: 8,
+    validate: {
+      validator: (password: string) => {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+          password
+        );
+      },
+      message:
+        "La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial",
+    },
+  })
   password: string;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    maxLength: 100,
+    trim: true,
+  })
   name: string;
 
   @Prop([
     {
-      street: String,
-      city: String,
-      zipCode: String,
-      isDefault: Boolean,
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      zipCode: { type: String, required: true, match: /^\d{5}$/ },
+      isDefault: { type: Boolean, default: false },
     },
   ])
   addresses: Array<Record<string, any>>;

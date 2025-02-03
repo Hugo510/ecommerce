@@ -9,13 +9,33 @@ export class SecurityLog extends Document {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: "User" })
   user: MongooseSchema.Types.ObjectId;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    enum: [
+      "login",
+      "logout",
+      "password_change",
+      "profile_update",
+      "order_created",
+      "payment_processed",
+      "failed_login_attempt",
+    ],
+  })
   action: string;
 
   @Prop({ type: Date, default: Date.now })
   createdAt: Date;
 
-  @Prop({ required: true })
+  @Prop({
+    required: true,
+    validate: {
+      validator: (ip: string) => {
+        return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(
+          ip
+        );
+      },
+    },
+  })
   ip: string;
 
   @Prop()
