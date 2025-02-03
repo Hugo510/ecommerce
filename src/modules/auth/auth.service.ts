@@ -49,7 +49,9 @@ export class AuthService {
     try {
       return this.jwtService.verify(token);
     } catch (error) {
-      this.logger.error(`Error al verificar token: ${error.message}`);
+      this.logger.error(
+        `Error al verificar token: ${(error as Error).message}`
+      );
       throw new UnauthorizedException("Token inválido");
     }
   }

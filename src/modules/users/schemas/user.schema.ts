@@ -74,8 +74,9 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
-// Definir los índices a nivel de schema
-UserSchema.index({ email: 1 }, { unique: true });
+// Se elimina el siguiente índice duplicado:
+// UserSchema.index({ email: 1 }, { unique: true });
+
 UserSchema.index({ role: 1 });
 UserSchema.index({ createdAt: -1 });
 UserSchema.index({ email: 1, role: 1 });

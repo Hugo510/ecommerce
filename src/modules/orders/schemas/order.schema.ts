@@ -34,7 +34,15 @@ export class Order extends Document {
   })
   status: string;
 
-  @Prop({ required: true })
+  // Se actualiza para definir explícitamente la estructura del objeto
+  @Prop({
+    type: {
+      street: String,
+      city: String,
+      zipCode: String,
+    },
+    required: true,
+  })
   shippingAddress: {
     street: string;
     city: string;

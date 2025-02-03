@@ -1,7 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { ValidationPipe } from "@nestjs/common";
 import { AppModule } from "./app.module";
-import * as helmet from "helmet";
+import helmet from "helmet";
 import * as csurf from "csurf";
 import { rateLimit } from "express-rate-limit";
 import { ConfigService } from "@nestjs/config";
@@ -14,25 +14,36 @@ async function bootstrap() {
   // Validación global
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
-  // Seguridad
-  app.use(helmet());
+  // Seguridad: Helmet con opciones extendidas
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          // ...otras directivas seguras...
+        },
+      },
+    })
+  );
   app.use(csurf());
   app.use(
     rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutos
-      max: 100, // límite de solicitudes por windowMs
+      windowMs: 15 * 60 * 1000,
+      max: 100,
     })
   );
 
   // Logger
   app.useLogger(app.get(Logger));
 
-  // CORS
+  // CORS dinámico según configuración
   app.enableCors({
-    origin: configService.get("ALLOWED_ORIGINS").split(","),
+    origin:
+      configService.get<string>("config.security.allowedOrigins")?.split(",") ||
+      [],
     credentials: true,
   });
 
-  await app.listen(configService.get("PORT") || 3000);
+  await app.listen(configService.get<number>("PORT") || 3000);
 }
 bootstrap();

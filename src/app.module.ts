@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
 import { LoggerModule } from "nestjs-pino";
 import configuration from "./config/configuration";
+import * as Joi from "joi";
 import { AuthModule } from "./modules/auth/auth.module";
 import { UsersModule } from "./modules/users/users.module";
 import { ProductsModule } from "./modules/products/products.module";
@@ -18,6 +19,12 @@ import { JwtAuthGuard } from "./modules/auth/guards/jwt-auth.guard";
     ConfigModule.forRoot({
       isGlobal: true,
       load: [configuration],
+      validationSchema: Joi.object({
+        PORT: Joi.number().default(3000),
+        MONGO_URI: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
+        ALLOWED_ORIGINS: Joi.string().required(),
+      }),
     }),
     LoggerModule.forRoot(),
     MongooseModule.forRootAsync({
