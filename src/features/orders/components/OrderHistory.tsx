@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react'; */
 import { Package } from 'lucide-react';
 import { useOrderStore } from '../store/orderStore';
 
@@ -26,13 +26,12 @@ function OrderHistory() {
                   </p>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    order.status === 'delivered'
+                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${order.status === 'delivered'
                       ? 'bg-green-100 text-green-800'
                       : order.status === 'shipped'
-                      ? 'bg-blue-100 text-blue-800'
-                      : 'bg-yellow-100 text-yellow-800'
-                  }`}>
+                        ? 'bg-blue-100 text-blue-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                    }`}>
                     {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                   </span>
                   <span className="font-medium">${order.total.toFixed(2)}</span>

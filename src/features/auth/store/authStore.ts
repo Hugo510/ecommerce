@@ -1,6 +1,9 @@
 import { create } from "zustand";
-import axiosInstance from "../../../api/axios";
 import { rolePermissions, Permission } from "../types/auth";
+import {
+  login as loginService,
+  register as registerService,
+} from "../services/authService";
 
 export interface User {
   id: string;
@@ -42,13 +45,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   isRegisterModalOpen: false,
   login: async (email, password) => {
     try {
-      // Llamada a la API de login
-      const response = await axiosInstance.post("/auth/login", {
-        email,
-        password,
-      });
-      // Se espera recibir { token, user } desde el backend
-      const { token, user } = response.data;
+      // Llamada a la API de login usando authService
+      const { token, user } = await loginService(email, password);
       localStorage.setItem("token", token);
       set({ user, isLoginModalOpen: false });
     } catch (error) {
@@ -58,14 +56,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
   register: async (name, email, password) => {
     try {
-      // Llamada a la API de registro
-      const response = await axiosInstance.post("/auth/register", {
-        name,
-        email,
-        password,
-      });
-      // Se espera recibir { token, user } desde el backend
-      const { token, user } = response.data;
+      // Llamada a la API de registro usando authService
+      const { token, user } = await registerService(name, email, password);
       localStorage.setItem("token", token);
       set({ user, isRegisterModalOpen: false });
     } catch (error) {

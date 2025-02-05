@@ -7,7 +7,7 @@ import ProductCard from './features/products/components/ProductCard';
 import Navbar from './features/layout/components/Navbar';
 import Hero from './features/layout/components/Hero';
 import LoginModal from './features/auth/components/LoginModal';
-import AdminPanel from './features/admin/components/AdminPanel';
+import AdminDashboard from './features/admin/components/AdminDashboard';
 import CartModal from './features/cart/components/CartModal';
 import CheckoutModal from './features/checkout/components/CheckoutModal';
 
@@ -15,16 +15,12 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   
-  // Call all hooks at the top level
   const { user } = useAuthStore();
   const { products } = useProductStore();
   const { categories } = useCategoryStore();
-  const canCreateProducts = usePermission('create', 'products');
-  const canUpdateProducts = usePermission('update', 'products');
-  const canDeleteProducts = usePermission('delete', 'products');
-
-  // Compute this value after all hooks are called
-  const canAccessAdmin = canCreateProducts || canUpdateProducts || canDeleteProducts;
+  const canAccessAdmin = usePermission('create', 'products') || 
+                        usePermission('update', 'products') || 
+                        usePermission('delete', 'products');
 
   const handleCheckout = () => {
     setIsCartOpen(false);
@@ -36,7 +32,7 @@ function App() {
       <Navbar onCartClick={() => setIsCartOpen(true)} />
       
       {canAccessAdmin ? (
-        <AdminPanel />
+        <AdminDashboard />
       ) : (
         <>
           <Hero />
