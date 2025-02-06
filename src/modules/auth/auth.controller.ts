@@ -11,6 +11,7 @@ import { AuthService } from "./auth.service";
 import { LoginDto } from "./dto/login.dto";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
 import { Public } from "./decorators/public.decorator";
+import { Request } from "express";
 
 @Controller("auth")
 export class AuthController {
@@ -34,4 +35,10 @@ export class AuthController {
     const token = req.headers.authorization?.split(" ")[1];
     return this.authService.verifyToken(token);
   }
+
+  // Comentar la ruta CSRF ya que no se está usando CSRF temporalmente
+  // @Get("csrf")
+  // getCsrfToken(@Req() req: Request): { csrfToken: string } {
+  //   return { csrfToken: req.csrfToken() };
+  // }
 }

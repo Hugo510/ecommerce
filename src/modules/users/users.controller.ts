@@ -8,6 +8,7 @@ import {
   Delete,
   ValidationPipe,
 } from "@nestjs/common";
+import { Public } from "../auth/decorators/public.decorator"; // Importar decorador Public
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
@@ -22,6 +23,7 @@ export class UsersController {
    * @param {CreateUserDto} createUserDto - Datos para crear el usuario.
    * @returns {Promise<User>} Usuario creado.
    */
+  @Public() // Marca este endpoint como público
   @Post()
   create(
     @Body(new ValidationPipe({ whitelist: true }))
