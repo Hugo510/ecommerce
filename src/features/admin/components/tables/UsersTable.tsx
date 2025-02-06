@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Pencil, Trash2 } from 'lucide-react';
-import { useAuthStore } from '../../../auth/store/authStore';
+import { useUsersStore, AdminUser } from '../../store/usersStore';
 
 interface UserFormData {
   name: string;
@@ -11,7 +11,7 @@ interface UserFormData {
 
 function UsersTable() {
   const [isEditing, setIsEditing] = useState(false);
-  const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
   const [formData, setFormData] = useState<UserFormData>({
     name: '',
     email: '',
@@ -19,14 +19,18 @@ function UsersTable() {
     role: 'customer',
   });
 
-  const { users, addUser, updateUser, deleteUser } = useAuthStore();
+  const { users, fetchUsers, addUser, updateUser, deleteUser } = useUsersStore();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (editingUser) {
-      updateUser({ ...editingUser, ...formData });
+      await updateUser({ ...editingUser, ...formData, createdAt: editingUser.createdAt });
     } else {
-      addUser(formData);
+      await addUser(formData);
     }
     resetForm();
   };
@@ -37,7 +41,7 @@ function UsersTable() {
     setEditingUser(null);
   };
 
-  const startEdit = (user: User) => {
+  const startEdit = (user: AdminUser) => {
     setIsEditing(true);
     setEditingUser(user);
     setFormData({
@@ -141,9 +145,8 @@ function UsersTable() {
                 <td className="py-4 px-4">{user.name}</td>
                 <td className="py-4 px-4">{user.email}</td>
                 <td className="py-4 px-4">
-                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${
-                    user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
-                  }`}>
+                  <span className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${user.role === 'admin' ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'
+                    }`}>
                     {user.role}
                   </span>
                 </td>

@@ -1,8 +1,14 @@
 import axiosInstance from "../../../api/axios";
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export interface AuthResponse {
   token: string;
-  user: any; // Se puede tipar más adelante si es necesario
+  user: User;
 }
 
 export const login = async (
