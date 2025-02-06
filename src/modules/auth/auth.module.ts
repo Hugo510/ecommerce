@@ -7,6 +7,10 @@ import { AuthController } from "./auth.controller";
 import { UsersModule } from "../users/users.module";
 import { JwtStrategy } from "./strategies/jwt.strategy";
 
+/**
+ * Módulo de autenticación.
+ * Maneja el proceso de autenticación y la emisión de tokens JWT.
+ */
 @Module({
   imports: [
     UsersModule,

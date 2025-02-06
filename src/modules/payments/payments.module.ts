@@ -4,6 +4,10 @@ import { PaymentModel, PaymentSchema } from "./schemas/payment.schema";
 import { PaymentsService } from "./payments.service";
 import { PaymentsController } from "./payments.controller";
 
+/**
+ * Módulo de pagos.
+ * Administra las operaciones de pagos y transacciones.
+ */
 @Module({
   imports: [
     MongooseModule.forFeature([

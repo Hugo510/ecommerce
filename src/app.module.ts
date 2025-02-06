@@ -14,6 +14,10 @@ import { APP_INTERCEPTOR, APP_GUARD } from "@nestjs/core";
 import { LoggingInterceptor } from "./common/interceptors/logging.interceptor";
 import { JwtAuthGuard } from "./modules/auth/guards/jwt-auth.guard";
 
+/**
+ * Módulo raíz de la aplicación.
+ * Configura la aplicación, incluyendo módulos, configuración global, logging y seguridad.
+ */
 @Module({
   imports: [
     ConfigModule.forRoot({

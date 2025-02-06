@@ -4,6 +4,10 @@ import { ReviewModel, ReviewSchema } from "./schemas/review.schema";
 import { ReviewsService } from "./reviews.service";
 import { ReviewsController } from "./reviews.controller";
 
+/**
+ * Módulo de reseñas.
+ * Permite gestionar las reseñas de productos o servicios.
+ */
 @Module({
   imports: [
     MongooseModule.forFeature([

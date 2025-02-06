@@ -17,6 +17,11 @@ import { Review } from "./interfaces/review.interface";
 export class ReviewsController {
   constructor(private readonly reviewsService: ReviewsService) {}
 
+  /**
+   * Crea una nueva reseña.
+   * @param {CreateReviewDto} createReviewDto - Datos para crear la reseña.
+   * @returns {Promise<Review>} Reseña creada.
+   */
   @Post()
   create(
     @Body(new ValidationPipe({ whitelist: true }))
@@ -25,16 +30,31 @@ export class ReviewsController {
     return this.reviewsService.create(createReviewDto);
   }
 
+  /**
+   * Obtiene todas las reseñas.
+   * @returns {Promise<Review[]>} Lista de reseñas.
+   */
   @Get()
   findAll(): Promise<Review[]> {
     return this.reviewsService.findAll();
   }
 
+  /**
+   * Obtiene una reseña por su ID.
+   * @param {string} id - Identificador de la reseña.
+   * @returns {Promise<Review>} Reseña encontrada.
+   */
   @Get(":id")
   findOne(@Param("id") id: string): Promise<Review> {
     return this.reviewsService.findOne(id);
   }
 
+  /**
+   * Actualiza una reseña.
+   * @param {string} id - Identificador de la reseña.
+   * @param {UpdateReviewDto} updateReviewDto - Datos para actualizar la reseña.
+   * @returns {Promise<Review>} Reseña actualizada.
+   */
   @Put(":id")
   update(
     @Param("id") id: string,
@@ -44,6 +64,11 @@ export class ReviewsController {
     return this.reviewsService.update(id, updateReviewDto);
   }
 
+  /**
+   * Elimina una reseña.
+   * @param {string} id - Identificador de la reseña.
+   * @returns {Promise<Review>}
+   */
   @Delete(":id")
   remove(@Param("id") id: string): Promise<Review> {
     return this.reviewsService.remove(id);

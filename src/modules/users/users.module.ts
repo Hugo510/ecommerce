@@ -4,6 +4,10 @@ import { User, UserSchema } from "./schemas/user.schema";
 import { UsersService } from "./users.service";
 import { UsersController } from "./users.controller";
 
+/**
+ * Módulo de usuarios.
+ * Se utiliza para gestionar los usuarios dentro de la aplicación.
+ */
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),

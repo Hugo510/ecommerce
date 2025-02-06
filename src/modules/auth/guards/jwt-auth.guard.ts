@@ -4,6 +4,10 @@ import { Reflector } from "@nestjs/core";
 import { Observable } from "rxjs";
 import { IS_PUBLIC_KEY } from "../decorators/public.decorator";
 
+/**
+ * Guardia de autenticación JWT.
+ * Protege las rutas que requieren autenticación mediante validación de token.
+ */
 @Injectable()
 export class JwtAuthGuard extends AuthGuard("jwt") {
   constructor(private reflector: Reflector) {
