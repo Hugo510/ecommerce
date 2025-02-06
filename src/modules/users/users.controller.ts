@@ -36,6 +36,7 @@ export class UsersController {
    * Obtiene la lista de usuarios.
    * @returns {Promise<User[]>} Lista de usuarios.
    */
+  @Public() // Marca este endpoint como público
   @Get()
   findAll(): Promise<User[]> {
     return this.usersService.findAll();
@@ -57,6 +58,7 @@ export class UsersController {
    * @param {UpdateUserDto} updateUserDto - Datos para la actualización.
    * @returns {Promise<User>} Usuario actualizado.
    */
+  @Public() // Marca este endpoint como público
   @Put(":id")
   update(
     @Param("id") id: string,
@@ -70,6 +72,7 @@ export class UsersController {
    * @param {string} id - Identificador del usuario.
    * @returns {Promise<User>}
    */
+  @Public() // Marca este endpoint como público
   @Delete(":id")
   remove(@Param("id") id: string): Promise<User> {
     return this.usersService.remove(id);

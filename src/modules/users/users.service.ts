@@ -36,13 +36,8 @@ export class UsersService implements OnModuleInit {
     return this.userModel.find().exec();
   }
 
-  async findOne(id: string): Promise<User> {
-    const user = await this.userModel.findById(id).exec();
-    if (!user) {
-      this.logger.warn(`Usuario no encontrado con id: ${id}`);
-      throw new NotFoundException("Usuario no encontrado");
-    }
-    return user;
+  async findOne(email: string): Promise<User | null> {
+    return this.userModel.findOne({ email });
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
