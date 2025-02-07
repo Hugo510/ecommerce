@@ -42,18 +42,19 @@ import { JwtAuthGuard } from "./modules/auth/guards/jwt-auth.guard";
     UsersModule,
     ProductsModule,
     OrdersModule,
-    ReviewsModule, // Nuevo módulo para reseñas
-    PaymentsModule, // Nuevo módulo para pagos
+    ReviewsModule, // Módulo para reseñas
+    PaymentsModule, // Módulo para pagos
   ],
   providers: [
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
     },
-    {
-      provide: APP_GUARD,
-      useClass: JwtAuthGuard,
-    },
+    // **** MODO VULNERABLE: Se comenta el guard global para desactivar la protección JWT ****
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: JwtAuthGuard,
+    // },
   ],
 })
 export class AppModule {}
