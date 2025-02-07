@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useProductStore } from './features/products/store/productStore';
-import { useCategoryStore } from './features/categories/store/categoryStore';
-import { usePermission } from './features/auth/hooks/usePermission';
-import ProductCard from './features/products/components/ProductCard';
-import Navbar from './features/layout/components/Navbar';
-import Hero from './features/layout/components/Hero';
-import LoginModal from './features/auth/components/LoginModal';
-import AdminDashboard from './features/admin/components/AdminDashboard';
-import CartModal from './features/cart/components/CartModal';
-import CheckoutModal from './features/checkout/components/CheckoutModal';
+import React, { useState } from "react";
+import { useProductStore } from "./features/products/store/productStore";
+import { useCategoryStore } from "./features/categories/store/categoryStore";
+// import { usePermission } from './features/auth/hooks/usePermission';
+import ProductCard from "./features/products/components/ProductCard";
+import Navbar from "./features/layout/components/Navbar";
+import Hero from "./features/layout/components/Hero";
+import LoginModal from "./features/auth/components/LoginModal";
+import AdminDashboard from "./features/admin/components/AdminDashboard";
+import CartModal from "./features/cart/components/CartModal";
+import CheckoutModal from "./features/checkout/components/CheckoutModal";
 
 function App() {
   // All hooks must be called at the top level, before any conditional logic
@@ -18,10 +18,10 @@ function App() {
   const { categories } = useCategoryStore();
 
   // Move permission check to a separate variable after all hooks are called
-  const canCreateProducts = usePermission('create', 'products');
-  const canUpdateProducts = usePermission('update', 'products');
-  const canDeleteProducts = usePermission('delete', 'products');
-  const canAccessAdmin = canCreateProducts || canUpdateProducts || canDeleteProducts;
+  // const canCreateProducts = usePermission('create', 'products');
+  // const canUpdateProducts = usePermission('update', 'products');
+  // const canDeleteProducts = usePermission('delete', 'products');
+  // const canAccessAdmin = canCreateProducts || canUpdateProducts || canDeleteProducts;
 
   const handleCheckout = () => {
     setIsCartOpen(false);
@@ -29,9 +29,9 @@ function App() {
   };
 
   const renderMainContent = () => {
-    if (canAccessAdmin) {
-      return <AdminDashboard />;
-    }
+    // if (canAccessAdmin) {
+    //   return <AdminDashboard />;
+    // }
 
     return (
       <>
@@ -66,12 +66,21 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 py-24">
           <div className="flex items-center justify-between mb-16">
             <div>
-              <h2 className="text-4xl font-bold text-black mb-4">Featured Products</h2>
-              <p className="text-zinc-600">Discover our curated selection of premium instruments</p>
+              <h2 className="text-4xl font-bold text-black mb-4">
+                Featured Products
+              </h2>
+              <p className="text-zinc-600">
+                Discover our curated selection of premium instruments
+              </p>
             </div>
-            <a href="#all" className="group flex items-center space-x-2 text-sm font-medium text-black">
+            <a
+              href="#all"
+              className="group flex items-center space-x-2 text-sm font-medium text-black"
+            >
               <span>View All Products</span>
-              <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
+                →
+              </span>
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

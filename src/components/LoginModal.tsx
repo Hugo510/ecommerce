@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
+import React, { useState } from "react";
+import { X } from "lucide-react";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -8,14 +8,14 @@ interface LoginModalProps {
 }
 
 function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onLogin(email, password);
+    // onLogin(email, password);
   };
 
   return (
@@ -37,7 +37,7 @@ function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.02] border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
-                required
+                // required
               />
             </div>
             <div>
@@ -47,7 +47,7 @@ function LoginModal({ isOpen, onClose, onLogin }: LoginModalProps) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.02] border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
-                required
+                // required
               />
             </div>
             <button

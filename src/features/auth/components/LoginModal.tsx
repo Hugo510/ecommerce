@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
-import { useAuthStore } from '../store/authStore';
+import React, { useState } from "react";
+import { X } from "lucide-react";
+// import { useAuthStore } from '../store/authStore';
 
 function LoginModal() {
-  const { isLoginModalOpen, login, toggleLoginModal } = useAuthStore();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const { isLoginModalOpen, login, toggleLoginModal } = useAuthStore();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    login(email, password);
+    // login(email, password);
   };
 
-  if (!isLoginModalOpen) {
-    return null;
-  }
+  // if (!isLoginModalOpen) {
+  //   return null;
+  // }
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
       <div className="bg-white rounded-3xl p-8 w-full max-w-md relative">
         <button
-          onClick={toggleLoginModal}
+          // onClick={toggleLoginModal}
           className="absolute right-4 top-4 p-2 hover:bg-black/[0.03] rounded-xl transition-colors"
         >
           <X size={20} />
@@ -35,7 +35,7 @@ function LoginModal() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.02] border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
-                required
+                // required
               />
             </div>
             <div>
@@ -45,7 +45,7 @@ function LoginModal() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.02] border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
-                required
+                // required
               />
             </div>
             <button

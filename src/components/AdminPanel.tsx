@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Plus, Pencil, Trash2 } from 'lucide-react';
+import React, { useState } from "react";
+import { Plus, Pencil, Trash2 } from "lucide-react";
 
 interface Product {
   id: number;
@@ -11,44 +11,49 @@ interface Product {
 
 interface AdminPanelProps {
   products: Product[];
-  onAddProduct: (product: Omit<Product, 'id'>) => void;
+  onAddProduct: (product: Omit<Product, "id">) => void;
   onUpdateProduct: (product: Product) => void;
   onDeleteProduct: (id: number) => void;
 }
 
-function AdminPanel({ products, onAddProduct, onUpdateProduct, onDeleteProduct }: AdminPanelProps) {
+function AdminPanel({
+  products,
+  onAddProduct,
+  onUpdateProduct,
+  onDeleteProduct,
+}: AdminPanelProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    image: '',
-    category: ''
+    name: "",
+    price: "",
+    image: "",
+    category: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingProduct) {
-      onUpdateProduct({
-        ...editingProduct,
-        name: formData.name,
-        price: parseFloat(formData.price),
-        image: formData.image,
-        category: formData.category
-      });
+      // onUpdateProduct({
+      //   ...editingProduct,
+      //   name: formData.name,
+      //   price: parseFloat(formData.price),
+      //   image: formData.image,
+      //   category: formData.category
+      // });
     } else {
-      onAddProduct({
-        name: formData.name,
-        price: parseFloat(formData.price),
-        image: formData.image,
-        category: formData.category
-      });
+      // onAddProduct({
+      //   name: formData.name,
+      //   price: parseFloat(formData.price),
+      //   image: formData.image,
+      //   category: formData.category
+      // });
     }
     resetForm();
   };
 
   const resetForm = () => {
-    setFormData({ name: '', price: '', image: '', category: '' });
+    setFormData({ name: "", price: "", image: "", category: "" });
     setIsEditing(false);
     setEditingProduct(null);
   };
@@ -60,7 +65,7 @@ function AdminPanel({ products, onAddProduct, onUpdateProduct, onDeleteProduct }
       name: product.name,
       price: product.price.toString(),
       image: product.image,
-      category: product.category
+      category: product.category,
     });
   };
 
@@ -79,14 +84,19 @@ function AdminPanel({ products, onAddProduct, onUpdateProduct, onDeleteProduct }
         </div>
 
         {isEditing && (
-          <form onSubmit={handleSubmit} className="mb-8 bg-black/[0.02] p-6 rounded-2xl">
+          <form
+            onSubmit={handleSubmit}
+            className="mb-8 bg-black/[0.02] p-6 rounded-2xl"
+          >
             <div className="grid grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium mb-2">Name</label>
                 <input
                   type="text"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   className="w-full px-4 py-3 rounded-xl bg-white border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
                   required
                 />
@@ -96,27 +106,37 @@ function AdminPanel({ products, onAddProduct, onUpdateProduct, onDeleteProduct }
                 <input
                   type="number"
                   value={formData.price}
-                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, price: e.target.value })
+                  }
                   className="w-full px-4 py-3 rounded-xl bg-white border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Image URL</label>
+                <label className="block text-sm font-medium mb-2">
+                  Image URL
+                </label>
                 <input
                   type="url"
                   value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, image: e.target.value })
+                  }
                   className="w-full px-4 py-3 rounded-xl bg-white border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Category</label>
+                <label className="block text-sm font-medium mb-2">
+                  Category
+                </label>
                 <input
                   type="text"
                   value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
                   className="w-full px-4 py-3 rounded-xl bg-white border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
                   required
                 />
@@ -134,7 +154,7 @@ function AdminPanel({ products, onAddProduct, onUpdateProduct, onDeleteProduct }
                 type="submit"
                 className="bg-black text-white px-4 py-2 rounded-xl hover:bg-black/90 transition-colors"
               >
-                {editingProduct ? 'Update' : 'Add'} Product
+                {editingProduct ? "Update" : "Add"} Product
               </button>
             </div>
           </form>
@@ -173,7 +193,7 @@ function AdminPanel({ products, onAddProduct, onUpdateProduct, onDeleteProduct }
                         <Pencil size={20} />
                       </button>
                       <button
-                        onClick={() => onDeleteProduct(product.id)}
+                        // onClick={() => onDeleteProduct(product.id)}
                         className="p-2 hover:bg-red-50 text-red-600 rounded-xl transition-colors"
                       >
                         <Trash2 size={20} />

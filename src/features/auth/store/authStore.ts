@@ -25,53 +25,50 @@ interface AuthState {
   user: User | null;
   isLoginModalOpen: boolean;
   isRegisterModalOpen: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>;
-  logout: () => void;
-  toggleLoginModal: () => void;
-  toggleRegisterModal: () => void;
+  // login: (email: string, password: string) => Promise<void>;
+  // register: (name: string, email: string, password: string) => Promise<void>;
+  // logout: () => void;
+  // toggleLoginModal: () => void;
+  // toggleRegisterModal: () => void;
   addAddress: (address: Omit<Address, "id">) => void;
   removeAddress: (addressId: string) => void;
   setDefaultAddress: (addressId: string) => void;
-  hasPermission: (
-    action: Permission["action"],
-    resource: Permission["resource"]
-  ) => boolean;
+  // hasPermission: (
+  //   action: Permission["action"],
+  //   resource: Permission["resource"]
+  // ) => boolean;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   isLoginModalOpen: false,
   isRegisterModalOpen: false,
-  login: async (email, password) => {
-    try {
-      // Llamada a la API de login usando authService
-      const { token, user } = await loginService(email, password);
-      localStorage.setItem("token", token);
-      set({ user, isLoginModalOpen: false });
-    } catch (error) {
-      console.error("Error en login:", error);
-      // Se puede incorporar manejo de errores (mensajes, notificaciones, etc.)
-    }
-  },
-  register: async (name, email, password) => {
-    try {
-      // Llamada a la API de registro usando authService
-      const { token, user } = await registerService(name, email, password);
-      localStorage.setItem("token", token);
-      set({ user, isRegisterModalOpen: false });
-    } catch (error) {
-      console.error("Error en registro:", error);
-    }
-  },
-  logout: () => {
-    localStorage.removeItem("token");
-    set({ user: null });
-  },
-  toggleLoginModal: () =>
-    set((state) => ({ isLoginModalOpen: !state.isLoginModalOpen })),
-  toggleRegisterModal: () =>
-    set((state) => ({ isRegisterModalOpen: !state.isRegisterModalOpen })),
+  // login: async (email, password) => {
+  //   try {
+  //     const { token, user } = await loginService(email, password);
+  //     localStorage.setItem("token", token);
+  //     set({ user, isLoginModalOpen: false });
+  //   } catch (error) {
+  //     console.error("Error en login:", error);
+  //   }
+  // },
+  // register: async (name, email, password) => {
+  //   try {
+  //     const { token, user } = await registerService(name, email, password);
+  //     localStorage.setItem("token", token);
+  //     set({ user, isRegisterModalOpen: false });
+  //   } catch (error) {
+  //     console.error("Error en registro:", error);
+  //   }
+  // },
+  // logout: () => {
+  //   localStorage.removeItem("token");
+  //   set({ user: null });
+  // },
+  // toggleLoginModal: () =>
+  //   set((state) => ({ isLoginModalOpen: !state.isLoginModalOpen })),
+  // toggleRegisterModal: () =>
+  //   set((state) => ({ isRegisterModalOpen: !state.isRegisterModalOpen })),
   addAddress: (address) =>
     set((state) => ({
       user: state.user
@@ -105,11 +102,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
           }
         : null,
     })),
-  hasPermission: (action, resource) => {
-    const user = get().user;
-    if (!user) return false;
-    return rolePermissions[user.role].some(
-      (perm) => perm.action === action && perm.resource === resource
-    );
-  },
+  // hasPermission: (action, resource) => {
+  //   const user = get().user;
+  //   if (!user) return false;
+  //   return rolePermissions[user.role].some(
+  //     (perm) => perm.action === action && perm.resource === resource
+  //   );
+  // },
 }));

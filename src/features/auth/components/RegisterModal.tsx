@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import { X } from 'lucide-react';
-import { useAuthStore } from '../store/authStore';
+import React, { useState } from "react";
+import { X } from "lucide-react";
+// import { useAuthStore } from '../store/authStore';
 
 function RegisterModal() {
-  const { isRegisterModalOpen, register, toggleRegisterModal } = useAuthStore();
+  // const { isRegisterModalOpen, register, toggleRegisterModal } = useAuthStore();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
-  if (!isRegisterModalOpen) return null;
+  // if (!isRegisterModalOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      alert("Passwords do not match");
       return;
     }
-    register(formData.name, formData.email, formData.password);
+    // register(formData.name, formData.email, formData.password);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ function RegisterModal() {
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
       <div className="bg-white rounded-3xl p-8 w-full max-w-md relative">
         <button
-          onClick={toggleRegisterModal}
+          // onClick={toggleRegisterModal}
           className="absolute right-4 top-4 p-2 hover:bg-black/[0.03] rounded-xl transition-colors"
         >
           <X size={20} />
@@ -74,7 +74,9 @@ function RegisterModal() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-2">Confirm Password</label>
+            <label className="block text-sm font-medium mb-2">
+              Confirm Password
+            </label>
             <input
               type="password"
               name="confirmPassword"
@@ -91,13 +93,13 @@ function RegisterModal() {
             Create Account
           </button>
           <p className="text-center text-sm text-zinc-500">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <button
               type="button"
-              onClick={() => {
-                toggleRegisterModal();
-                useAuthStore.getState().toggleLoginModal();
-              }}
+              // onClick={() => {
+              //   toggleRegisterModal();
+              //   useAuthStore.getState().toggleLoginModal();
+              // }}
               className="text-black hover:underline"
             >
               Sign in
