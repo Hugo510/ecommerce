@@ -31,7 +31,7 @@ function LoginModal() {
             <div>
               <label className="block text-sm font-medium mb-2">Email</label>
               <input
-                type="email"
+                type="string"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.02] border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
@@ -41,7 +41,7 @@ function LoginModal() {
             <div>
               <label className="block text-sm font-medium mb-2">Password</label>
               <input
-                type="password"
+                // type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-black/[0.02] border-0 focus:outline-none focus:ring-2 focus:ring-black/10"
